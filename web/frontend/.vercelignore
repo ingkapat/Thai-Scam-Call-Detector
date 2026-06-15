@@ -1,0 +1,6 @@
+backend
+hf_space
+tools
+*.md
+node_modules
+.venv

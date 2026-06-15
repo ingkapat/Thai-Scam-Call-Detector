@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thai Scam Call Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="styles.css?v=3" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Thai Scam Call Detector</h1>
+  </header>
+
+  <main class="stage">
+
+    <!-- LEFT: phone -->
+    <section class="phone-col">
+      <div id="phone" class="phone">
+        <div class="phone-screen">
+          <!-- call screenshots (real iOS frames) -->
+          <img id="frame-ringing" class="frame" src="public/call-ringing.jpg" alt="incoming call" hidden />
+          <img id="frame-sliding" class="frame" src="public/call-sliding.jpg" alt="answering" hidden />
+          <img id="frame-incall"  class="frame" src="public/call-incall.jpg"  alt="in call" hidden />
+
+          <!-- sleep / powered-off screen (glossy black, no clock) -->
+          <div id="screen-sleep" class="sleep"></div>
+
+          <!-- live call timer overlay (covers baked 00:01) -->
+          <div id="call-timer" class="call-timer" hidden>00:00</div>
+
+          <!-- scam notification banner -->
+          <div id="noti" class="noti" hidden>
+            <div class="noti-head">
+              <span class="noti-icon">!</span>
+              <span class="noti-app">SCAM DETECTOR</span>
+              <span class="noti-time">now</span>
+            </div>
+            <div class="noti-title">Likely scam call</div>
+            <div id="noti-body" class="noti-body">Confidence 0.99 — high-risk keywords detected</div>
+          </div>
+        </div>
+      </div>
+
+      <audio id="player" preload="auto"></audio>
+
+      <p id="phone-caption" class="caption">Phone is sleeping — upload an mp3 to simulate a call</p>
+
+      <div class="controls">
+        <label class="btn btn-primary">
+          <input type="file" id="file-input" accept="audio/mpeg,audio/mp3,.mp3,audio/wav,.wav" hidden />
+          Upload mp3
+        </label>
+        <button id="btn-demo" class="btn">Run demo</button>
+        <button id="btn-clear" class="btn btn-ghost">Clear</button>
+      </div>
+    </section>
+
+    <!-- RIGHT: results -->
+    <section class="result-col">
+      <div class="prob-card">
+        <div class="prob-label">Overall scam probability</div>
+        <div class="prob-row">
+          <span id="big-prob" class="big-prob">—</span>
+          <span id="big-tag" class="big-tag">awaiting</span>
+        </div>
+        <div class="prob-bar"><div id="big-bar" class="prob-bar-fill"></div></div>
+      </div>
+
+      <div class="log-card">
+        <div class="log-head">
+          <span>sliding window · 5s / round</span>
+          <span id="log-status" class="log-status">idle</span>
+        </div>
+        <div id="log" class="log">
+          <div class="log-hint">// predictions will stream here once a call starts</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span id="api-state">demo mode (no backend connected)</span>
+  </footer>
+
+  <script src="config.js?v=3"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
