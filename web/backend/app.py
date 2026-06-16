@@ -1,6 +1,6 @@
 """Thai Scam Call Detector — backend (two-stage streaming).
 
-Mirrors the TA Parkinson pattern: a small FastAPI app loaded with the model,
+a small FastAPI app loaded with the model,
 served by uvicorn, called by the static frontend.
 
 Pipeline (from notebook/experiment2 `predict_two_stage_streaming`):
